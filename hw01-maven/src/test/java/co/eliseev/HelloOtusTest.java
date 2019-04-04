@@ -10,10 +10,10 @@ public class HelloOtusTest {
 
 
     @Test
-    public void testConvertStringsToInts() {
+    public void testConvertLineToInts_Ok() {
 
-        String[] testData = new String[]{"1", "2", "5"};
-        int[] result = HelloOtus.convertStringsToInts(testData);
+        String line = "1 2 5";
+        int[] result = HelloOtus.convertLineToInts(line);
         assertThat(result.length, equalTo(3));
         assertThat(result[0], equalTo(1));
         assertThat(result[1], equalTo(2));
@@ -22,24 +22,24 @@ public class HelloOtusTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testFailConvertStringsToInts() {
+    public void testConvertLineToInts_Fail() {
 
         try {
-            HelloOtus.convertStringsToInts(null);
+            HelloOtus.convertLineToInts("");
         } catch (IllegalArgumentException expectedException) {
-            assertThat(expectedException.getMessage(), equalTo("Please enter args to calculate guavaMean"));
+            assertThat(expectedException.getMessage(), equalTo("Your input line is empty. Please enter numbers with space delimiters and press ENTER"));
             throw expectedException;
         }
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testIllegalArgsConvertingStringsToInts() {
+    public void testConvertLineToInts_FailParse() {
 
         try {
-            String[] testData = new String[]{"1", "2", "5a"};
-            HelloOtus.convertStringsToInts(testData);
+            String input = "1 2 5a";
+            HelloOtus.convertLineToInts(input);
         } catch (IllegalArgumentException expectedException) {
-            assertThat(expectedException.getMessage(), equalTo("Argument must be Integer, but input was: 5a"));
+            assertThat(expectedException.getMessage(), equalTo("Arguments must be Integer type, but was: 5a"));
             throw expectedException;
         }
     }
@@ -48,9 +48,33 @@ public class HelloOtusTest {
     public void testGuavaIntMean() {
 
         int[] testData = new int[]{1, 2, 5};
-        double result = HelloOtus.guavaMean(testData);
+        double result = HelloOtus.calculate(testData);
         assertThat(result, closeTo(2.6, 0.1));
 
+    }
+
+    @Test
+    public void testConvertStringsToInts_Ok() {
+
+        String[] strings = new String[]{"1", "2", "5"};
+        int[] result = HelloOtus.convertStringsToInts(strings);
+        assertThat(result.length, equalTo(3));
+        assertThat(result[0], equalTo(1));
+        assertThat(result[1], equalTo(2));
+        assertThat(result[2], equalTo(5));
+
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testConvertStringsToInts_Fail() {
+
+        String[] strings = new String[]{"1", "2", "5b"};
+        try {
+            HelloOtus.convertStringsToInts(strings);
+        } catch (IllegalArgumentException expectedException) {
+            assertThat(expectedException.getMessage(), equalTo("Arguments must be Integer type, but was: 5b"));
+            throw expectedException;
+        }
     }
 }
 

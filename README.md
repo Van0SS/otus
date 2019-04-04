@@ -25,17 +25,31 @@ _First preparing application_ `mvn clean package` then:
 -
     _Execute:_
     
-    `java -jar hw01-maven/target/guava-mean.jar`
-    
-    _Output_:
-    `Exception in thread "main" java.lang.IllegalArgumentException: Please enter args to calculate guavaMean`
-
--
-    _Execute:_
-    
     `java -jar hw01-maven/target/guava-mean.jar 1 2 5a`
     
     _Output_:
-    `Exception in thread "main" java.lang.IllegalArgumentException: Argument must be Integer, but input was: 5a`
+    `Exception in thread "main" java.lang.IllegalArgumentException: Argument must be Integer, but was: 5a`
+
+- OR USER TERMINAL INTERFACE
+
+    _Execute without args:_
+    
+    `java -jar hw01-maven/target/guava-mean.jar`
+    
+    _Output_:
+    
+    `______________________________
+     To calculate mean of integers please enter numbers with space delimiters and press ENTER.
+     To quit enter 'q' and press ENTER
+     ______________________________`
+     
+     _Then type:_
+     `1 2 7`
+
+    _Output_:
+    `Mean result is 3.333333333333333`
+    
+    _Type 'q' and press ENTER to exit_
+
 
 ---
