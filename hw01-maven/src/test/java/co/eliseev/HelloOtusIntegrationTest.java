@@ -118,4 +118,19 @@ public class HelloOtusIntegrationTest {
         assertThat(err.toString(), equalTo("Arguments must be Integer type, but was: 5a\n"));
     }
 
+    @Test
+    public void test_showHelp() {
+
+        ByteArrayOutputStream out = newOut();
+        ByteArrayOutputStream err = newErr();
+
+        HelloOtus.showHelp();
+
+        assertThat(out.toString(), equalTo(
+                "______________________________\n" +
+                        "To calculate mean of integers please enter numbers with space delimiters and press ENTER.\n" +
+                        "To quit enter 'q' and press ENTER\n" +
+                        "______________________________\n"));
+        assertThat(err.toString(), equalTo(""));
+    }
 }

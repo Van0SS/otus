@@ -4,13 +4,12 @@ import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.number.IsCloseTo.closeTo;
 
 public class HelloOtusTest {
 
 
     @Test
-    public void testConvertLineToInts_Ok() {
+    public void test_convertLineToInts() {
 
         String line = "1 2 5";
         int[] result = HelloOtus.convertLineToInts(line);
@@ -22,7 +21,7 @@ public class HelloOtusTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testConvertLineToInts_Fail() {
+    public void test_convertLineToInts_EmptyLine() {
 
         try {
             HelloOtus.convertLineToInts("");
@@ -33,7 +32,7 @@ public class HelloOtusTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testConvertLineToInts_FailParse() {
+    public void test_convertLineToInts_FailParse() {
 
         try {
             String input = "1 2 5a";
@@ -45,16 +44,7 @@ public class HelloOtusTest {
     }
 
     @Test
-    public void testGuavaIntMean() {
-
-        int[] testData = new int[]{1, 2, 5};
-        double result = HelloOtus.calculate(testData);
-        assertThat(result, closeTo(2.6, 0.1));
-
-    }
-
-    @Test
-    public void testConvertStringsToInts_Ok() {
+    public void test_ConvertStringsToInts() {
 
         String[] strings = new String[]{"1", "2", "5"};
         int[] result = HelloOtus.convertStringsToInts(strings);
@@ -66,7 +56,7 @@ public class HelloOtusTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testConvertStringsToInts_Fail() {
+    public void test_convertStringsToInts_FailParse() {
 
         String[] strings = new String[]{"1", "2", "5b"};
         try {
@@ -75,6 +65,13 @@ public class HelloOtusTest {
             assertThat(expectedException.getMessage(), equalTo("Arguments must be Integer type, but was: 5b"));
             throw expectedException;
         }
+    }
+
+    @Test
+    public void test_hasArguments() {
+        assertThat(HelloOtus.hasArguments(new String[]{"a", ""}), equalTo(true));
+        assertThat(HelloOtus.hasArguments(new String[]{}), equalTo(false));
+        assertThat(HelloOtus.hasArguments(null), equalTo(false));
     }
 }
 

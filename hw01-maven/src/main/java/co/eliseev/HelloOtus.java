@@ -8,51 +8,57 @@ public class HelloOtus {
 
     public static void main(String[] args) {
 
-        if (args != null && args.length > 0) {
-            /*
-                Use arguments when starting the application to calculate
-             */
+        if (hasArguments(args)) {
+            calculate(args);
+        } else {
+            showHelp();
+            readArgsByScannerAndCalculate();
+        }
+    }
+
+    static boolean hasArguments(String[] args) {
+        return args != null && args.length > 0;
+    }
+
+    private static void calculate(String[] args) {
+        try {
+            int[] ints = convertStringsToInts(args);
+            double result = calculate(ints);
+            System.out.println("Mean result is " + result);
+
+        } catch (IllegalArgumentException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
+    static void showHelp() {
+        System.out.println("______________________________");
+        System.out.println("To calculate mean of integers please enter numbers with space delimiters and press ENTER.");
+        System.out.println("To quit enter 'q' and press ENTER");
+        System.out.println("______________________________");
+    }
+
+    private static void readArgsByScannerAndCalculate() {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+
+            String line = scanner.nextLine();
+            if (line.equals("q")) {
+                break;
+            }
+
             try {
 
-                int[] ints = convertStringsToInts(args);
+                int[] ints = convertLineToInts(line);
                 double result = calculate(ints);
                 System.out.println("Mean result is " + result);
 
             } catch (IllegalArgumentException ex) {
                 System.err.println(ex.getMessage());
             }
-
-        } else {
-
-            /*
-               Or use terminal interface with input scanner to calculate
-            */
-            System.out.println("______________________________");
-            System.out.println("To calculate mean of integers please enter numbers with space delimiters and press ENTER.");
-            System.out.println("To quit enter 'q' and press ENTER");
-            System.out.println("______________________________");
-
-
-            Scanner scanner = new Scanner(System.in);
-            while (true) {
-
-                String line = scanner.nextLine();
-                if (line.equals("q")) {
-                    break;
-                }
-
-                try {
-
-                    int[] ints = convertLineToInts(line);
-                    double result = calculate(ints);
-                    System.out.println("Mean result is " + result);
-
-                } catch (IllegalArgumentException ex) {
-                    System.err.println(ex.getMessage());
-                }
-            }
         }
     }
+
 
     static int[] convertStringsToInts(String[] args) {
 
@@ -81,7 +87,7 @@ public class HelloOtus {
         return convertStringsToInts(args);
     }
 
-    static double calculate(int... args) {
+    private static double calculate(int... args) {
         return Stats.meanOf(args);
     }
 }
