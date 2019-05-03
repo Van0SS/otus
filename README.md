@@ -53,3 +53,17 @@ _First preparing application_ `mvn clean package` then:
 
 
 ---
+___
+## module hw02-arraylist
+This is the implementation of the interface List. Analog of ArrayList.
+
+Methods implemented here:
+
+size, isEmpty, contains, forEach, toArray, add, remove, containsAll, addAll, removeAll,
+removeIf, retainAll, replaceAll, sort, clear, get, set, indexOf, lastIndexOf, iterator, 
+listIterator, subList
+
+Not supported:
+- spliterator
+- no checks on the maximum number of items
+- no concurrent modifications
