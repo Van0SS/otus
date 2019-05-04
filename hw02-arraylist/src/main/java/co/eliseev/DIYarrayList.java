@@ -159,9 +159,7 @@ public class DIYarrayList<E> implements List<E> {
             @SuppressWarnings("unchecked") E element = (E) elements[i];
 
             if (filter.test(element)) {
-                System.arraycopy(elements, i + 1, elements, i, size);
-                elements[size - 1] = null;
-                size--;
+                remove(element);
             } else {
                 i++;
             }
@@ -194,7 +192,7 @@ public class DIYarrayList<E> implements List<E> {
         }
 
         // Clean up
-        for (; newIndex -1< size; newIndex++) { // FIXME newIndex-1 : because of newIndex++ in last operation
+        for (; newIndex - 1 < size; newIndex++) { // FIXME newIndex-1 : because of newIndex++ in last operation
             elements[newIndex] = null;
             if (size > 0) size--; // FIXME
         }
@@ -313,7 +311,7 @@ public class DIYarrayList<E> implements List<E> {
     }
 
     public Spliterator<E> spliterator() {
-        return new MySpliterator();
+        throw new UnsupportedOperationException("spliterator");
     }
 
     private void checkSize() {
@@ -393,28 +391,6 @@ public class DIYarrayList<E> implements List<E> {
             elements[cursor++] = e;
             size++;
 
-        }
-    }
-
-    private class MySpliterator implements Spliterator<E> {
-        @Override
-        public boolean tryAdvance(Consumer<? super E> action) {
-            throw new UnsupportedOperationException("tryAdvance");
-        }
-
-        @Override
-        public Spliterator<E> trySplit() {
-            throw new UnsupportedOperationException("trySplit");
-        }
-
-        @Override
-        public long estimateSize() {
-            throw new UnsupportedOperationException("estimateSize");
-        }
-
-        @Override
-        public int characteristics() {
-            throw new UnsupportedOperationException("characteristics");
         }
     }
 
