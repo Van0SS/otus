@@ -13,13 +13,15 @@
         <guava.version>27.1-jre</guava.version>
         <junit.version>5.4.2</junit.version>
         <maven.assembly.version>3.1.1</maven.assembly.version>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <modules>
         <module>hw01-maven</module>
+        <module>hw02-arraylist</module>
+        <module>hw03-junit</module>
     </modules>
 
 
@@ -36,7 +38,6 @@
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
                 <version>${junit.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
